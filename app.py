@@ -8,36 +8,42 @@ st.set_page_config(page_title="Churn Dashboard", layout="wide")
 st.title("📊 Customer Churn Dashboard")
 
 # =============================================
-# FILE UPLOAD
+# LOAD DATA FROM GITHUB
 # =============================================
-uploaded = st.file_uploader("Upload your churn CSV", type="csv")
+url = "https://raw.githubusercontent.com/mohammadjessa/Customer-churn-analysis/main/Telco-Customer-Churn.csv"
 
-if uploaded:
-    df = pd.read_csv(uploaded)
+df = pd.read_csv(url)
 
-    # Clean column names
-    df.columns = df.columns.str.strip().str.lower()
+# =============================================
+# CLEAN DATA
+# =============================================
+df.columns = df.columns.str.strip().str.lower()
 
-    st.subheader("Dataset Preview")
-    st.dataframe(df.head(), use_container_width=True)
+# Convert churn to numeric (FIXES YOUR ERROR)
+df['churn'] = df['churn'].map({'Yes': 1, 'No': 0})
 
-    # =============================================
-    # METRICS
-    # =============================================
-    col1, col2, col3 = st.columns(3)
+# Convert totalcharges properly
+df['totalcharges'] = pd.to_numeric(df['totalcharges'], errors='coerce')
+df['totalcharges'].fillna(df['totalcharges'].median(), inplace=True)
 
-    with col1:
-        st.metric("Total Customers", len(df))
+# =============================================
+# PREVIEW
+# =============================================
+st.subheader("Dataset Preview")
+st.dataframe(df.head(), use_container_width=True)
 
-    with col2:
-        # Handle both Yes/No and 0/1
-        if df['churn'].dtype == 'object':
-            churn_rate = df['churn'].value_counts(normalize=True).get('Yes', 0) * 100
-        else:
-            churn_rate = df['churn'].mean() * 100
+# =============================================
+# METRICS
+# =============================================
+col1, col2, col3 = st.columns(3)
 
-        st.metric("Churn Rate", f"{churn_rate:.1f}%")
+with col1:
+    st.metric("Total Customers", len(df))
 
-    with col3:
-        avg_charge = df['monthlycharges'].mean()
-        st.metric("Avg Monthly Charge", f"${avg_charge:.2f}")
+with col2:
+    churn_rate = df['churn'].mean() * 100
+    st.metric("Churn Rate", f"{churn_rate:.1f}%")
+
+with col3:
+    avg_charge = df['monthlycharges'].mean()
+    st.metric("Avg Monthly Charge", f"${avg_charge:.2f}")
