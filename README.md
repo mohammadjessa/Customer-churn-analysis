@@ -1,34 +1,36 @@
-
-# Telco Customer Churn Analysis
-
-**Data Analysis Portfolio Project**  
-**Goal**: Understand why customers are leaving and provide actionable business recommendations.
-
-### 📋 Project Overview
-Analysis of the Telco Customer Churn dataset (7,032 customers) to identify key drivers of churn and suggest retention strategies.
-
-### 📊 Key Insights
-- **Overall Churn Rate**: 26.58%
-- Month-to-month contract customers churn **~3x higher** than customers with 1 or 2-year contracts
-- Customers paying with **Electronic Check** have the highest churn rate
-- Higher **Monthly Charges** are strongly associated with churn
-
-### 📈 Visualizations Included
-- Churn rate by Contract Type
-- Churn rate by Payment Method
-- Monthly Charges vs Tenure colored by Churn
-- Churn distribution charts
-
-### 💡 Business Recommendations
-1. Offer discounts and incentives to convert Month-to-month customers to longer contracts
-2. Improve the Electronic Check payment experience or promote better payment methods
-3. Create targeted retention campaigns for customers with high monthly bills
-
-### 🛠️ Tools & Technologies
-- **Python**
-- **Pandas** – Data cleaning and analysis
-- **Matplotlib / Seaborn** – Visualizations
-- **Jupyter Notebook**
-
-### 📁 Repository Structure
-customer-churn-analysis/ ├── telco-customer-churn.csv ├── Customer_Churn_Analysis.ipynb ├── README.md
+Telco Customer Churn Analysis
+An end-to-end data analysis project exploring why telecom customers leave — and what the business can do about it.
+The dataset covers 7,032 customers and includes contract type, payment method, monthly charges, tenure, and service usage. The goal was to move beyond surface-level churn rates and actually pinpoint where the business is losing the most revenue.
+***What I Found
+Overall churn rate: 26.6% — higher than the industry average, which made the contract type breakdown the most interesting part of this analysis
+Customers on month-to-month contracts churn at roughly 3x the rate of those on annual or two-year plans — the drop-off is steep and consistent across charge levels
+Electronic check payers have the highest churn of any payment method, which points to a friction or trust issue rather than a pricing one
+High monthly charges alone don't explain churn, but high charges combined with short tenure is where the real concentration is — those customers haven't had time to build loyalty and are paying full price
+***Files in This Repo
+File	What it does
+`telco-customer-churn.ipynb`	Main analysis notebook — EDA, visualizations, feature breakdown
+`app.py`	Streamlit dashboard for interactive exploration
+`portfolio_analysis_queries.sql`	BigQuery SQL: segment rollups, revenue at risk, retention lever analysis
+`customer_churn_clean_bigquery.sql`	Data cleaning logic prepared for BigQuery
+`requirements.txt`	Python dependencies
+`telco_customer_churn_dashboard_preview.pdf`	Screenshot/export of the Looker Studio dashboard
+Dataset: Telco Customer Churn on Kaggle
+***Running the Streamlit App
+pip install -r requirements.txt
+streamlit run app.py
+The app loads the data directly from this repo, so no local CSV needed.
+***Running the SQL
+The SQL files are written for BigQuery. Replace your_project.your_dataset with your own project/dataset path. The cleaning script (customer_churn_clean_bigquery.sql) should be run first — it outputs the customer_churn_clean table that the analysis queries depend on.
+***Business Recommendations
+1. Push month-to-month customers toward annual contracts
+A discount of even 10–15% on a 12-month commitment would likely pay for itself given the churn differential. The data supports targeting customers in months 2–6 of tenure, before habits form.
+2. Look at the electronic check experience specifically
+The churn rate for e-check users is noticeably higher than other payment methods, including other digital ones. This doesn't look like a price problem — it's worth checking whether that payment flow has friction, failures, or trust issues.
+3. Build a high-risk segment flag
+The SQL in portfolio_analysis_queries.sql already defines a risk_segment field. Piping that into a CRM or lifecycle email tool is a straightforward next step — the segments are defined by contract type, tenure bucket, and charge level.
+***Tools Used
+Python (Pandas, Matplotlib, Seaborn)
+Jupyter Notebook
+Streamlit
+BigQuery SQL
+Looker Studio (dashboard export in PDF)
