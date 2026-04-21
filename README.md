@@ -35,7 +35,7 @@ Customer-churn-analysis/
 
 **Streamlit app**
 ## 🚀 Live Demo
-👉 [Open Streamlit Dashboard]([YOUR-URL-HERE](https://customer-churn-analysis-farmmh8hysewfyckrgpycy.streamlit.app/))
+👉 [Open Streamlit Dashboard](https://customer-churn-analysis-farmmh8hysewfyckrgpycy.streamlit.app/)
 
 ```bash
 pip install -r requirements.txt
