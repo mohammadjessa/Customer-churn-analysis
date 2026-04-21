@@ -30,6 +30,11 @@ def load_data(url):
     return df
 
 df = load_data(DATA_URL)
+# OLD (broken in pandas 2.x)
+df["totalcharges"].fillna(df["totalcharges"].median(), inplace=True)
+
+# NEW
+df["totalcharges"] = df["totalcharges"].fillna(df["totalcharges"].median())
 
 # ── Sidebar filters ───────────────────────────────────────────────────────────
 st.sidebar.header("Filters")
