@@ -74,7 +74,7 @@ The SQL already defines a `risk_segment` field based on contract type, tenure, a
 | Tool | Use |
 |---|---|
 | Python · Pandas | Data cleaning and analysis |
-| Matplotlib · Seaborn | Visualisations |
+| Matplotlib · Seaborn → Plotly | Visualisations |
 | Jupyter Notebook | Exploratory analysis |
 | Streamlit | Interactive dashboard |
 | BigQuery SQL | Segmentation and revenue analysis |
