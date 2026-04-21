@@ -33,8 +33,7 @@ Customer-churn-analysis/
 
 ## Quickstart
 
-**Streamlit app**
-##  Live Demo
+## Live Demo
 👉 [Open Streamlit Dashboard](https://customer-churn-analysis-farmmh8hysewfyckrgpycy.streamlit.app/)
 
 ![Dashboard Preview](dashboard_preview.png)
@@ -74,7 +73,7 @@ The SQL already defines a `risk_segment` field based on contract type, tenure, a
 | Tool | Use |
 |---|---|
 | Python · Pandas | Data cleaning and analysis |
-| Matplotlib · Seaborn → Plotly | Visualisations |
+| Plotly | Interactive visualisations |
 | Jupyter Notebook | Exploratory analysis |
 | Streamlit | Interactive dashboard |
 | BigQuery SQL | Segmentation and revenue analysis |
