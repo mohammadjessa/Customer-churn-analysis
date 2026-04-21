@@ -34,8 +34,11 @@ Customer-churn-analysis/
 ## Quickstart
 
 **Streamlit app**
-## 🚀 Live Demo
+##  Live Demo
 👉 [Open Streamlit Dashboard](https://customer-churn-analysis-farmmh8hysewfyckrgpycy.streamlit.app/)
+
+![Dashboard Preview](dashboard_preview.png)
+
 
 ```bash
 pip install -r requirements.txt
