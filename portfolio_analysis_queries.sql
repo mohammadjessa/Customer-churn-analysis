@@ -94,18 +94,18 @@ FROM lever_rollup
 ORDER BY lever_type, churn_rate DESC;
 
 
--- ── 4. Tenure bucket breakdown ────────────────────────────────────────────────
+-- ── 4. tenure_months bucket breakdown ────────────────────────────────────────────────
 -- Groups customers into cohorts by how long they've been a customer.
--- Early-tenure customers (0–12 months) on month-to-month contracts
+-- Early-tenure_months customers (0–12 months) on month-to-month contracts
 -- are consistently the highest-risk group — this query surfaces that clearly.
 
 SELECT
     CASE
-        WHEN tenure BETWEEN 0  AND 12 THEN '0–12 months'
-        WHEN tenure BETWEEN 13 AND 24 THEN '13–24 months'
-        WHEN tenure BETWEEN 25 AND 48 THEN '25–48 months'
+        WHEN tenure_months BETWEEN 0  AND 12 THEN '0–12 months'
+        WHEN tenure_months BETWEEN 13 AND 24 THEN '13–24 months'
+        WHEN tenure_months BETWEEN 25 AND 48 THEN '25–48 months'
         ELSE '49+ months'
-    END                                                     AS tenure_bucket,
+    END                                                     AS tenure_months_bucket,
     contract,
     COUNT(*)                                                AS customers,
     ROUND(SAFE_DIVIDE(SUM(churn_flag), COUNT(*)), 4)        AS churn_rate,
@@ -113,7 +113,7 @@ SELECT
 FROM `your_project.your_dataset.customer_churn_clean`
 GROUP BY 1, 2
 ORDER BY
-    CASE tenure_bucket
+    CASE tenure_months_bucket
         WHEN '0–12 months'  THEN 1
         WHEN '13–24 months' THEN 2
         WHEN '25–48 months' THEN 3
